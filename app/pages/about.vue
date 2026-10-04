@@ -131,7 +131,7 @@
           </a>
 
           <a
-            href="https://www.linkedin.com/in/dujevidas/"
+            href="https://www.linkedin.com/in/duje-vidas/"
             target="_blank"
             rel="noopener noreferrer"
           >
