@@ -46,14 +46,25 @@
             <h2>Creative / Experiments</h2>
           </div>
 
-          <ProjectCard
-            title="Time Leper"
-            category="Personal Project · 3D / Real-Time"
-            description="A D&D creature brought from a rough phone sketch through the complete 3D pipeline and into Unreal Engine 5."
-            tools="Blender · Unreal Engine 5"
-            image="/images/time-leper/cover.png"
-            to="/projects/time-leper"
-          />
+          <div class="project-list">
+            <ProjectCard
+              title="Time Leper"
+              category="Personal Project · 3D / Real-Time"
+              description="A D&D creature brought from a rough phone sketch through the complete 3D pipeline and into Unreal Engine 5."
+              tools="Blender · Unreal Engine 5"
+              image="/images/time-leper/cover.png"
+              to="/projects/time-leper"
+            />
+
+            <ProjectCard
+              title="Blender Studies"
+              category="Early Work · 3D"
+              description="A small archive of early renders created while learning modeling, materials, lighting, and rendering in Blender."
+              tools="Blender"
+              image="/images/blender-studies/donut.png"
+              to="/projects/blender-studies"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -226,6 +237,12 @@
   font-size: 0.9rem;
 }
 
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
 @media (max-width: 768px) {
   .work {
     padding-block: 32px 96px;
@@ -237,6 +254,10 @@
 
   .section-heading {
     margin-bottom: 28px;
+  }
+
+  .project-list {
+    gap: 80px;
   }
 }
 </style>
