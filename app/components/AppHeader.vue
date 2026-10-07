@@ -1,28 +1,16 @@
 <template>
   <header class="site-header">
     <div class="container header-inner">
-      <NuxtLink
-        to="/"
-        class="site-name"
-      >
+      <NuxtLink to="/" class="site-name">
         Duje Vidas
       </NuxtLink>
 
-      <nav
-        class="navigation"
-        aria-label="Main navigation"
-      >
-        <NuxtLink
-          to="/"
-          class="nav-link"
-        >
+      <nav class="navigation" aria-label="Main navigation">
+        <NuxtLink to="/" class="nav-link">
           Work
         </NuxtLink>
 
-        <NuxtLink
-          to="/about"
-          class="nav-link"
-        >
+        <NuxtLink to="/about" class="nav-link">
           About
         </NuxtLink>
       </nav>

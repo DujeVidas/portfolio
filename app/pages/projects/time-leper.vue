@@ -1,167 +1,167 @@
 <script setup lang="ts">
-  type SculptDetail = 'head' | 'spine' | 'claws'
+type SculptDetail = 'head' | 'spine' | 'claws'
 
-  const activeSculptDetail = ref<SculptDetail>('head')
-  
-  const sculptTechnicalOpen = ref(false)
+const activeSculptDetail = ref<SculptDetail>('head')
 
-  const sculptDetails = {
-    head: {
-      number: '01',
-      title: 'Head',
-      image: '/images/time-leper/sculpt/head.png',
-      description:
-        'The head establishes the creature’s skeletal silhouette and distorted anatomy.'
-    },
-    spine: {
-      number: '02',
-      title: 'Spine',
-      image: '/images/time-leper/sculpt/spine.png',
-      description:
-        'The spine became one of the creature’s defining features, with deep crevices, fractures and layered bone-like forms.'
-    },
-    claws: {
-      number: '03',
-      title: 'Claws',
-      image: '/images/time-leper/sculpt/claws.png',
-      description:
-        'The extremities terminate in three elongated curved hooks, reinforcing the creature’s unnatural silhouette.'
-    }
-  } satisfies Record<
-    SculptDetail,
-    {
-      number: string
-      title: string
-      image: string
-      description: string
-    }
-  >
+const sculptTechnicalOpen = ref(false)
 
-  const activeDetail = computed(
-    () => sculptDetails[activeSculptDetail.value]
-  )
+const sculptDetails = {
+  head: {
+    number: '01',
+    title: 'Head',
+    image: '/images/time-leper/sculpt/head.png',
+    description:
+      'The head establishes the creature’s skeletal silhouette and distorted anatomy.'
+  },
+  spine: {
+    number: '02',
+    title: 'Spine',
+    image: '/images/time-leper/sculpt/spine.png',
+    description:
+      'The spine became one of the creature’s defining features, with deep crevices, fractures and layered bone-like forms.'
+  },
+  claws: {
+    number: '03',
+    title: 'Claws',
+    image: '/images/time-leper/sculpt/claws.png',
+    description:
+      'The extremities terminate in three elongated curved hooks, reinforcing the creature’s unnatural silhouette.'
+  }
+} satisfies Record<
+  SculptDetail,
+  {
+    number: string
+    title: string
+    image: string
+    description: string
+  }
+>
 
-  type TextureView = 'baseColor' | 'roughness' | 'normal' | 'emission'
+const activeDetail = computed(
+  () => sculptDetails[activeSculptDetail.value]
+)
 
-  const activeTextureView = ref<TextureView>('baseColor')
+type TextureView = 'baseColor' | 'roughness' | 'normal' | 'emission'
 
-  const textureViews = {
-    baseColor: {
-      label: 'Base Color',
-      image: '/images/time-leper/texturing/base-color.png',
-      alt: 'Time Leper displaying the base color texture'
-    },
-    roughness: {
-      label: 'Roughness',
-      image: '/images/time-leper/texturing/roughness.png',
-      alt: 'Time Leper displaying the roughness texture'
-    },
-    normal: {
-      label: 'Normal',
-      image: '/images/time-leper/texturing/normal.png',
-      alt: 'Time Leper displaying the normal map'
-    },
-    emission: {
-      label: 'Emission',
-      image: '/images/time-leper/texturing/emission.png',
-      alt: 'Time Leper displaying the emission mask'
-    }
-  } satisfies Record<
-    TextureView,
-    {
-      label: string
-      image: string
-      alt: string
-    }
-  >
+const activeTextureView = ref<TextureView>('baseColor')
 
-  const activeTexture = computed(
-    () => textureViews[activeTextureView.value]
-  )
+const textureViews = {
+  baseColor: {
+    label: 'Base Color',
+    image: '/images/time-leper/texturing/base-color.png',
+    alt: 'Time Leper displaying the base color texture'
+  },
+  roughness: {
+    label: 'Roughness',
+    image: '/images/time-leper/texturing/roughness.png',
+    alt: 'Time Leper displaying the roughness texture'
+  },
+  normal: {
+    label: 'Normal',
+    image: '/images/time-leper/texturing/normal.png',
+    alt: 'Time Leper displaying the normal map'
+  },
+  emission: {
+    label: 'Emission',
+    image: '/images/time-leper/texturing/emission.png',
+    alt: 'Time Leper displaying the emission mask'
+  }
+} satisfies Record<
+  TextureView,
+  {
+    label: string
+    image: string
+    alt: string
+  }
+>
 
-  function handleTextureTabKeydown(
+const activeTexture = computed(
+  () => textureViews[activeTextureView.value]
+)
+
+function handleTextureTabKeydown(
   event: KeyboardEvent,
   currentKey: TextureView
-  ) {
-    const keys = Object.keys(textureViews) as TextureView[]
-    const currentIndex = keys.indexOf(currentKey)
+) {
+  const keys = Object.keys(textureViews) as TextureView[]
+  const currentIndex = keys.indexOf(currentKey)
 
-    let nextIndex = currentIndex
+  let nextIndex = currentIndex
 
-    switch (event.key) {
-      case 'ArrowRight':
-        nextIndex = (currentIndex + 1) % keys.length
-        break
+  switch (event.key) {
+    case 'ArrowRight':
+      nextIndex = (currentIndex + 1) % keys.length
+      break
 
-      case 'ArrowLeft':
-        nextIndex = (currentIndex - 1 + keys.length) % keys.length
-        break
+    case 'ArrowLeft':
+      nextIndex = (currentIndex - 1 + keys.length) % keys.length
+      break
 
-      case 'Home':
-        nextIndex = 0
-        break
+    case 'Home':
+      nextIndex = 0
+      break
 
-      case 'End':
-        nextIndex = keys.length - 1
-        break
+    case 'End':
+      nextIndex = keys.length - 1
+      break
 
-      default:
-        return
-    }
-
-    event.preventDefault()
-
-    const nextKey = keys[nextIndex]
-
-    if (!nextKey) {
+    default:
       return
-    }
-
-    activeTextureView.value = nextKey
-
-    nextTick(() => {
-      document
-        .getElementById(`texture-tab-${nextKey}`)
-        ?.focus()
-    })
   }
 
-  const lightbox = reactive<{
-    open: boolean
-    src: string
-    alt: string
-    caption: string
-    trigger: HTMLButtonElement | null
-  }>({
-    open: false,
-    src: '',
-    alt: '',
-    caption: '',
-    trigger: null
+  event.preventDefault()
+
+  const nextKey = keys[nextIndex]
+
+  if (!nextKey) {
+    return
+  }
+
+  activeTextureView.value = nextKey
+
+  nextTick(() => {
+    document
+      .getElementById(`texture-tab-${nextKey}`)
+      ?.focus()
   })
+}
 
-  function openLightbox(
-    src: string,
-    alt: string,
-    caption = '',
-    trigger: HTMLButtonElement | null = null
-  ) {
-    lightbox.src = src
-    lightbox.alt = alt
-    lightbox.caption = caption
-    lightbox.trigger = trigger
-    lightbox.open = true
-  }
+const lightbox = reactive<{
+  open: boolean
+  src: string
+  alt: string
+  caption: string
+  trigger: HTMLButtonElement | null
+}>({
+  open: false,
+  src: '',
+  alt: '',
+  caption: '',
+  trigger: null
+})
 
-  function closeLightbox() {
-    lightbox.open = false
+function openLightbox(
+  src: string,
+  alt: string,
+  caption = '',
+  trigger: HTMLButtonElement | null = null
+) {
+  lightbox.src = src
+  lightbox.alt = alt
+  lightbox.caption = caption
+  lightbox.trigger = trigger
+  lightbox.open = true
+}
 
-    nextTick(() => {
-      lightbox.trigger?.focus()
-      lightbox.trigger = null
-    })
-  }
-  
+function closeLightbox() {
+  lightbox.open = false
+
+  nextTick(() => {
+    lightbox.trigger?.focus()
+    lightbox.trigger = null
+  })
+}
+
 </script>
 <template>
   <main>
@@ -191,157 +191,124 @@
         </div>
 
         <div class="hero-visual">
-          <img
-            src="/images/time-leper/hero.png"
-            alt="Final Time Leper creature in Unreal Engine 5"
-          >
+          <img src="/images/time-leper/hero.png" alt="Final Time Leper creature in Unreal Engine 5">
         </div>
       </div>
     </section>
     <section class="origin">
-        <div class="container">
-            <div class="section-intro">
-            <p class="section-label">
-                01 / Origin
-            </p>
-
-            <h2>
-                From D&amp;D to 3D
-            </h2>
-
-            <p class="section-description">
-                Time Leper began as a boss for my first D&amp;D 5e one-shot.
-                Starting from a creature reference I found online, I made a rough
-                sketch on my phone with my own changes before developing the
-                design further in Blender.
-            </p>
-            <a
-            class="character-sheet-link"
-            href="/documents/sheet.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            >
-                View the D&amp;D 5e character sheet
-                <span aria-hidden="true">↗</span>
-            </a>
-            </div>
-
-            <div class="origin-grid">
-            <figure class="origin-item">
-                <EnlargeableImage
-                  src="/images/time-leper/origin/reference.jpg"
-                  alt="Visual reference used as inspiration for the Time Leper"
-                  caption="Pinterest Reference · Original artist unknown"
-                  image-class="origin-image"
-                  object-fit="contain"
-                  @enlarge="openLightbox"
-                />
-
-                <figcaption>
-                    <span>01</span>
-
-                    <span class="caption-content">
-                        <span class="caption-title">
-                        Pinterest Reference
-                        </span>
-
-                        <span class="caption-credit">
-                        Original artist unknown ·
-                        <a
-                            href="https://www.pinterest.com/pin/876372408748492492/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            View source ↗
-                        </a>
-                        </span>
-                    </span>
-                </figcaption>
-            </figure>
-
-            <figure class="origin-item">
-                <EnlargeableImage
-                  src="/images/time-leper/origin/sketch.jpg"
-                  alt="Original Time Leper concept sketch drawn on a phone"
-                  caption="Original Phone Sketch"
-                  image-class="origin-image"
-                  object-fit="contain"
-                  @enlarge="openLightbox"
-                />
-
-                <figcaption>
-                <span>02</span>
-                Phone Sketch
-                </figcaption>
-            </figure>
-
-            <figure class="origin-item">
-                <EnlargeableImage
-                  src="/images/time-leper/origin/sculpt.png"
-                  alt="High-poly Time Leper sculpt in Blender"
-                  caption="Blender Sculpt"
-                  image-class="origin-image"
-                  object-fit="contain"
-                  @enlarge="openLightbox"
-                />
-
-                <figcaption>
-                <span>03</span>
-                Blender Sculpt
-                </figcaption>
-            </figure>
-            </div>
-        </div>
-    </section>
-    <section
-    id="overview"
-    class="overview"
-    >
-    <div class="container">
+      <div class="container">
         <div class="section-intro">
-        <p class="section-label">
+          <p class="section-label">
+            01 / Origin
+          </p>
+
+          <h2>
+            From D&amp;D to 3D
+          </h2>
+
+          <p class="section-description">
+            Time Leper began as a boss for my first D&amp;D 5e one-shot.
+            Starting from a creature reference I found online, I made a rough
+            sketch on my phone with my own changes before developing the
+            design further in Blender.
+          </p>
+          <a class="character-sheet-link" href="/documents/sheet.pdf" target="_blank" rel="noopener noreferrer">
+            View the D&amp;D 5e character sheet
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="origin-grid">
+          <figure class="origin-item">
+            <EnlargeableImage src="/images/time-leper/origin/reference.jpg"
+              alt="Visual reference used as inspiration for the Time Leper"
+              caption="Pinterest Reference · Original artist unknown" image-class="origin-image" object-fit="contain"
+              @enlarge="openLightbox" />
+
+            <figcaption>
+              <span>01</span>
+
+              <span class="caption-content">
+                <span class="caption-title">
+                  Pinterest Reference
+                </span>
+
+                <span class="caption-credit">
+                  Original artist unknown ·
+                  <a href="https://www.pinterest.com/pin/876372408748492492/" target="_blank" rel="noopener noreferrer">
+                    View source ↗
+                  </a>
+                </span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="origin-item">
+            <EnlargeableImage src="/images/time-leper/origin/sketch.jpg"
+              alt="Original Time Leper concept sketch drawn on a phone" caption="Original Phone Sketch"
+              image-class="origin-image" object-fit="contain" @enlarge="openLightbox" />
+
+            <figcaption>
+              <span>02</span>
+              Phone Sketch
+            </figcaption>
+          </figure>
+
+          <figure class="origin-item">
+            <EnlargeableImage src="/images/time-leper/origin/sculpt.png" alt="High-poly Time Leper sculpt in Blender"
+              caption="Blender Sculpt" image-class="origin-image" object-fit="contain" @enlarge="openLightbox" />
+
+            <figcaption>
+              <span>03</span>
+              Blender Sculpt
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section id="overview" class="overview">
+      <div class="container">
+        <div class="section-intro">
+          <p class="section-label">
             02 / Overview
-        </p>
+          </p>
 
-        <h2>
+          <h2>
             Project Overview
-        </h2>
+          </h2>
 
-        <p class="section-description">
+          <p class="section-description">
             What started as a creature for a D&amp;D one-shot became an
             exploration of the complete real-time 3D asset pipeline — from
             high-poly sculpting and retopology to texturing, baking, Unreal
             Engine materials, and Niagara effects.
-        </p>
+          </p>
         </div>
 
         <dl class="project-specs">
-        <div class="spec">
+          <div class="spec">
             <dt>Type</dt>
             <dd>Personal Project</dd>
-        </div>
+          </div>
 
-        <div class="spec">
+          <div class="spec">
             <dt>Role</dt>
             <dd>Solo</dd>
-        </div>
+          </div>
 
-        <div class="spec">
+          <div class="spec">
             <dt>Tools</dt>
             <dd>Blender · Unreal Engine 5</dd>
-        </div>
+          </div>
 
-        <div class="spec">
+          <div class="spec">
             <dt>Year</dt>
             <dd>2026</dd>
-        </div>
+          </div>
         </dl>
-    </div>
+      </div>
     </section>
-    <section
-      id="sculpt"
-      class="sculpt"
-    >
+    <section id="sculpt" class="sculpt">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -361,43 +328,25 @@
 
         <div class="sculpt-explorer">
           <div class="sculpt-image">
-            <img
-              src="/images/time-leper/sculpt/full.png"
-              alt="Full high-poly Time Leper sculpt in Blender"
-            >
+            <img src="/images/time-leper/sculpt/full.png" alt="Full high-poly Time Leper sculpt in Blender">
 
-            <button
-              class="sculpt-hotspot hotspot-head"
-              :class="{ active: activeSculptDetail === 'head' }"
-              type="button"
-              aria-label="View head sculpt detail"
-              :aria-pressed="activeSculptDetail === 'head'"
-              @click="activeSculptDetail = 'head'"
-            >
+            <button class="sculpt-hotspot hotspot-head" :class="{ active: activeSculptDetail === 'head' }" type="button"
+              aria-label="View head sculpt detail" :aria-pressed="activeSculptDetail === 'head'"
+              @click="activeSculptDetail = 'head'">
               <span>01</span>
               Head
             </button>
 
-            <button
-              class="sculpt-hotspot hotspot-spine"
-              :class="{ active: activeSculptDetail === 'spine' }"
-              type="button"
-              aria-label="View spine sculpt detail"
-              :aria-pressed="activeSculptDetail === 'spine'"
-              @click="activeSculptDetail = 'spine'"
-            >
+            <button class="sculpt-hotspot hotspot-spine" :class="{ active: activeSculptDetail === 'spine' }"
+              type="button" aria-label="View spine sculpt detail" :aria-pressed="activeSculptDetail === 'spine'"
+              @click="activeSculptDetail = 'spine'">
               <span>02</span>
               Spine
             </button>
 
-            <button
-              class="sculpt-hotspot hotspot-claws"
-              :class="{ active: activeSculptDetail === 'claws' }"
-              type="button"
-              aria-label="View claw sculpt detail"
-              :aria-pressed="activeSculptDetail === 'claws'"
-              @click="activeSculptDetail = 'claws'"
-            >
+            <button class="sculpt-hotspot hotspot-claws" :class="{ active: activeSculptDetail === 'claws' }"
+              type="button" aria-label="View claw sculpt detail" :aria-pressed="activeSculptDetail === 'claws'"
+              @click="activeSculptDetail = 'claws'">
               <span>03</span>
               Claws
             </button>
@@ -408,10 +357,7 @@
           </p>
           <div class="sculpt-detail">
             <div class="sculpt-detail-image">
-              <img
-                :src="activeDetail.image"
-                :alt="`${activeDetail.title} detail of the Time Leper sculpt`"
-              >
+              <img :src="activeDetail.image" :alt="`${activeDetail.title} detail of the Time Leper sculpt`">
             </div>
 
             <div class="sculpt-detail-content">
@@ -429,29 +375,16 @@
             </div>
           </div>
           <div class="technical-details">
-            <button
-              class="technical-toggle"
-              type="button"
-              :aria-expanded="sculptTechnicalOpen"
-              aria-controls="sculpt-technical-content"
-              @click="sculptTechnicalOpen = !sculptTechnicalOpen"
-            >
+            <button class="technical-toggle" type="button" :aria-expanded="sculptTechnicalOpen"
+              aria-controls="sculpt-technical-content" @click="sculptTechnicalOpen = !sculptTechnicalOpen">
               <span>Technical details</span>
 
-              <span
-                class="technical-icon"
-                :class="{ open: sculptTechnicalOpen }"
-                aria-hidden="true"
-              >
+              <span class="technical-icon" :class="{ open: sculptTechnicalOpen }" aria-hidden="true">
                 +
               </span>
             </button>
 
-            <div
-              v-show="sculptTechnicalOpen"
-              id="sculpt-technical-content"
-              class="technical-content"
-            >
+            <div v-show="sculptTechnicalOpen" id="sculpt-technical-content" class="technical-content">
               <div class="technical-grid">
                 <div>
                   <p class="technical-label">
@@ -496,10 +429,7 @@
         </div>
       </div>
     </section>
-    <section
-      id="retopology"
-      class="retopology"
-    >
+    <section id="retopology" class="retopology">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -518,14 +448,10 @@
         </div>
 
         <div class="retopology-comparison">
-          <ImageComparison
-            before-image="/images/time-leper/retopology/high-poly.png"
-            after-image="/images/time-leper/retopology/low-poly.png"
-            before-alt="High-poly Time Leper sculpt"
-            after-alt="Game-ready Time Leper wireframe"
-            before-label="High-Poly Clay"
-            after-label="Game-Ready Wireframe"
-          />
+          <ImageComparison before-image="/images/time-leper/retopology/high-poly.png"
+            after-image="/images/time-leper/retopology/low-poly.png" before-alt="High-poly Time Leper sculpt"
+            after-alt="Game-ready Time Leper wireframe" before-label="High-Poly Clay"
+            after-label="Game-Ready Wireframe" />
 
           <p class="figure-caption">
             <span>FIG. 02</span>
@@ -534,10 +460,7 @@
         </div>
       </div>
     </section>
-    <section
-      id="uv"
-      class="uv-section"
-    >
+    <section id="uv" class="uv-section">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -558,13 +481,9 @@
 
         <div class="uv-grid">
           <figure class="uv-item">
-            <EnlargeableImage
-              src="/images/time-leper/uv/seams.png"
-              alt="UV seams marked on the Time Leper mesh in Blender"
-              caption="UV Seams"
-              image-class="uv-image"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/uv/seams.png"
+              alt="UV seams marked on the Time Leper mesh in Blender" caption="UV Seams" image-class="uv-image"
+              @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 03</span>
@@ -573,14 +492,8 @@
           </figure>
 
           <figure class="uv-item">
-            <EnlargeableImage
-              src="/images/time-leper/uv/layout.png"
-              alt="Packed Time Leper UV layout in Blender"
-              caption="UV Layout"
-              image-class="uv-image"
-              object-fit="contain"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/uv/layout.png" alt="Packed Time Leper UV layout in Blender"
+              caption="UV Layout" image-class="uv-image" object-fit="contain" @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 04</span>
@@ -589,14 +502,9 @@
           </figure>
 
           <figure class="uv-item">
-            <EnlargeableImage
-              src="/images/time-leper/uv/stretch.png"
-              alt="UV angle stretch visualization on the Time Leper mesh"
-              caption="Angle Stretch"
-              image-class="uv-image"
-              object-fit="contain"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/uv/stretch.png"
+              alt="UV angle stretch visualization on the Time Leper mesh" caption="Angle Stretch" image-class="uv-image"
+              object-fit="contain" @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 05</span>
@@ -606,10 +514,7 @@
         </div>
       </div>
     </section>
-    <section
-      id="baking"
-      class="baking-section"
-    >
+    <section id="baking" class="baking-section">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -630,13 +535,9 @@
 
         <div class="baking-grid">
           <figure class="baking-item">
-            <EnlargeableImage
-              src="/images/time-leper/baking/high-poly.png"
-              alt="High-poly sculpt detail on the Time Leper spine"
-              caption="High Poly"
-              image-class="baking-image"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/baking/high-poly.png"
+              alt="High-poly sculpt detail on the Time Leper spine" caption="High Poly" image-class="baking-image"
+              @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 06</span>
@@ -645,13 +546,9 @@
           </figure>
 
           <figure class="baking-item">
-            <EnlargeableImage
-              src="/images/time-leper/baking/low-poly.png"
-              alt="Raw game-ready Time Leper spine without the baked normal map"
-              caption="Raw Low Poly"
-              image-class="baking-image"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/baking/low-poly.png"
+              alt="Raw game-ready Time Leper spine without the baked normal map" caption="Raw Low Poly"
+              image-class="baking-image" @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 07</span>
@@ -660,13 +557,9 @@
           </figure>
 
           <figure class="baking-item">
-            <EnlargeableImage
-              src="/images/time-leper/baking/normal-baked.png"
-              alt="Game-ready Time Leper spine with the baked normal map applied"
-              caption="Normal Baked"
-              image-class="baking-image"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/baking/normal-baked.png"
+              alt="Game-ready Time Leper spine with the baked normal map applied" caption="Normal Baked"
+              image-class="baking-image" @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 08</span>
@@ -676,10 +569,7 @@
         </div>
       </div>
     </section>
-    <section
-      id="texturing"
-      class="texturing-section"
-    >
+    <section id="texturing" class="texturing-section">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -698,13 +588,8 @@
         </div>
 
         <figure class="texturing-final">
-          <EnlargeableImage
-            src="/images/time-leper/texturing/final.png"
-            alt="Final textured Time Leper"
-            caption="Final PBR Material"
-            image-class="texturing-final-image"
-            @enlarge="openLightbox"
-          />
+          <EnlargeableImage src="/images/time-leper/texturing/final.png" alt="Final textured Time Leper"
+            caption="Final PBR Material" image-class="texturing-final-image" @enlarge="openLightbox" />
 
           <figcaption class="figure-caption">
             <span>FIG. 09</span>
@@ -713,47 +598,24 @@
         </figure>
 
         <div class="texture-breakdown">
-          <div
-            class="texture-tabs"
-            role="tablist"
-            aria-label="Texture channels"
-          >
-            <button
-              v-for="(view, key) in textureViews"
-              :id="`texture-tab-${key}`"
-              :key="key"
-              class="texture-tab"
-              :class="{ active: activeTextureView === key }"
-              type="button"
-              role="tab"
-              :aria-selected="activeTextureView === key"
-              :aria-controls="`texture-panel-${key}`"
-              :tabindex="activeTextureView === key ? 0 : -1"
-              @click="activeTextureView = key as TextureView"
-              @keydown="handleTextureTabKeydown($event, key as TextureView)"
-            >
+          <div class="texture-tabs" role="tablist" aria-label="Texture channels">
+            <button v-for="(view, key) in textureViews" :id="`texture-tab-${key}`" :key="key" class="texture-tab"
+              :class="{ active: activeTextureView === key }" type="button" role="tab"
+              :aria-selected="activeTextureView === key" :aria-controls="`texture-panel-${key}`"
+              :tabindex="activeTextureView === key ? 0 : -1" @click="activeTextureView = key as TextureView"
+              @keydown="handleTextureTabKeydown($event, key as TextureView)">
               {{ view.label }}
             </button>
           </div>
 
-          <div
-            :id="`texture-panel-${activeTextureView}`"
-            class="texture-viewer"
-            role="tabpanel"
-            :aria-labelledby="`texture-tab-${activeTextureView}`"
-          >
-            <img
-              :src="activeTexture.image"
-              :alt="activeTexture.alt"
-            >
+          <div :id="`texture-panel-${activeTextureView}`" class="texture-viewer" role="tabpanel"
+            :aria-labelledby="`texture-tab-${activeTextureView}`">
+            <img :src="activeTexture.image" :alt="activeTexture.alt">
           </div>
         </div>
       </div>
     </section>
-    <section
-      id="unreal"
-      class="unreal-section"
-    >
+    <section id="unreal" class="unreal-section">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -774,40 +636,21 @@
 
         <div class="material-graph">
           <div class="material-graph-image">
-            <img
-              src="/images/time-leper/unreal/material-graph.png"
-              alt="Time Leper material graph in Unreal Engine 5"
-            >
+            <img src="/images/time-leper/unreal/material-graph.png" alt="Time Leper material graph in Unreal Engine 5">
 
-            <span
-              class="graph-callout callout-base"
-              type="button"
-              aria-label="Base color material nodes"
-            >
+            <span class="graph-callout callout-base" type="button" aria-label="Base color material nodes">
               01
             </span>
 
-            <span
-              class="graph-callout callout-roughness"
-              type="button"
-              aria-label="Roughness material nodes"
-            >
+            <span class="graph-callout callout-roughness" type="button" aria-label="Roughness material nodes">
               02
             </span>
 
-            <span
-              class="graph-callout callout-emission"
-              type="button"
-              aria-label="Emission material nodes"
-            >
+            <span class="graph-callout callout-emission" type="button" aria-label="Emission material nodes">
               03
             </span>
 
-            <span
-              class="graph-callout callout-normal"
-              type="button"
-              aria-label="Normal map configuration"
-            >
+            <span class="graph-callout callout-normal" type="button" aria-label="Normal map configuration">
               04
             </span>
 
@@ -858,10 +701,7 @@
         </div>
       </div>
     </section>
-    <section
-      id="niagara"
-      class="niagara-section"
-    >
+    <section id="niagara" class="niagara-section">
       <div class="container">
         <div class="section-intro">
           <p class="section-label">
@@ -882,14 +722,9 @@
 
         <div class="aura-process">
           <figure class="aura-material">
-            <EnlargeableImage
-              src="/images/time-leper/niagara/smoke-material.png"
-              alt="Smoke aura material setup in Unreal Engine 5"
-              caption="Smoke Material"
-              image-class="niagara-image"
-              object-fit="contain"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/niagara/smoke-material.png"
+              alt="Smoke aura material setup in Unreal Engine 5" caption="Smoke Material" image-class="niagara-image"
+              object-fit="contain" @enlarge="openLightbox" />
 
             <figcaption>
               <span>01</span>
@@ -926,10 +761,8 @@
 
         <figure class="aura-result">
           <div class="aura-result-image">
-            <img
-              src="/images/time-leper/niagara/final-aura.png"
-              alt="Final Time Leper render with the dark Niagara smoke aura"
-            >
+            <img src="/images/time-leper/niagara/final-aura.png"
+              alt="Final Time Leper render with the dark Niagara smoke aura">
           </div>
 
           <figcaption class="figure-caption">
@@ -939,10 +772,7 @@
         </figure>
       </div>
     </section>
-    <section
-      id="final"
-      class="final-section"
-    >
+    <section id="final" class="final-section">
       <div class="container">
         <div class="final-heading">
           <p class="section-label">
@@ -956,13 +786,9 @@
 
         <div class="final-gallery">
           <figure class="final-render final-render--hero">
-            <EnlargeableImage
-              src="/images/time-leper/final/render-01.png"
-              alt="Final full-body Time Leper render in Blender"
-              caption="Final Render"
-              image-class="final-image"
-              @enlarge="openLightbox"
-            />
+            <EnlargeableImage src="/images/time-leper/final/render-01.png"
+              alt="Final full-body Time Leper render in Blender" caption="Final Render" image-class="final-image"
+              @enlarge="openLightbox" />
 
             <figcaption>
               <span>FIG. 12</span>
@@ -972,13 +798,9 @@
 
           <div class="final-gallery-secondary">
             <figure class="final-render">
-              <EnlargeableImage
-                src="/images/time-leper/final/render-02.png"
-                alt="Alternate Time Leper render in Blender with a different pose and lighting"
-                caption="Alternate View"
-                image-class="final-image"
-                @enlarge="openLightbox"
-              />
+              <EnlargeableImage src="/images/time-leper/final/render-02.png"
+                alt="Alternate Time Leper render in Blender with a different pose and lighting" caption="Alternate View"
+                image-class="final-image" @enlarge="openLightbox" />
 
               <figcaption>
                 <span>FIG. 13</span>
@@ -987,13 +809,8 @@
             </figure>
 
             <figure class="final-render">
-              <EnlargeableImage
-                src="/images/time-leper/final/render-03.png"
-                alt="Time Leper in Unreal Engine 5"
-                caption="Detail"
-                image-class="final-image"
-                @enlarge="openLightbox"
-              />
+              <EnlargeableImage src="/images/time-leper/final/render-03.png" alt="Time Leper in Unreal Engine 5"
+                caption="Detail" image-class="final-image" @enlarge="openLightbox" />
 
               <figcaption>
                 <span>FIG. 14</span>
@@ -1006,10 +823,7 @@
     </section>
     <section class="project-end">
       <div class="container">
-        <NuxtLink
-          to="/"
-          class="back-to-work"
-        >
+        <NuxtLink to="/" class="back-to-work">
           <span class="back-label">
             End of project
           </span>
@@ -1021,13 +835,8 @@
         </NuxtLink>
       </div>
     </section>
-    <ImageLightbox
-      :open="lightbox.open"
-      :src="lightbox.src"
-      :alt="lightbox.alt"
-      :caption="lightbox.caption"
-      @close="closeLightbox"
-    />
+    <ImageLightbox :open="lightbox.open" :src="lightbox.src" :alt="lightbox.alt" :caption="lightbox.caption"
+      @close="closeLightbox" />
   </main>
 </template>
 
@@ -1303,7 +1112,7 @@ h1 {
   padding: 28px 24px 32px 0;
 }
 
-.spec + .spec {
+.spec+.spec {
   padding-left: 24px;
   border-left: 1px solid var(--color-border);
 }
@@ -1339,7 +1148,7 @@ h1 {
     padding: 24px 20px 24px 0;
   }
 
-  .spec + .spec {
+  .spec+.spec {
     padding-left: 20px;
   }
 
@@ -1360,13 +1169,13 @@ h1 {
   }
 
   .spec,
-  .spec + .spec,
+  .spec+.spec,
   .spec:nth-child(3) {
     padding: 22px 0;
     border-left: 0;
   }
 
-  .spec + .spec {
+  .spec+.spec {
     border-top: 1px solid var(--color-border);
   }
 }
@@ -1567,7 +1376,7 @@ h1 {
   letter-spacing: -0.04em;
 }
 
-.sculpt-detail-content > p:last-child {
+.sculpt-detail-content>p:last-child {
   margin: 24px 0 0;
 
   color: var(--color-text-muted);
@@ -1645,7 +1454,7 @@ h1 {
   text-transform: uppercase;
 }
 
-.technical-grid > div > p:last-child {
+.technical-grid>div>p:last-child {
   margin: 0;
 
   color: var(--color-text-muted);
@@ -1939,7 +1748,7 @@ h1 {
   background: var(--color-surface);
 }
 
-.material-graph-image > img {
+.material-graph-image>img {
   display: block;
   width: 100%;
   height: auto;
@@ -1998,7 +1807,7 @@ h1 {
   border: 1px solid var(--color-border);
 }
 
-.material-notes > div {
+.material-notes>div {
   padding: 28px;
   background: var(--color-background);
 }
@@ -2065,8 +1874,7 @@ h1 {
 .aura-process {
   display: grid;
   grid-template-columns:
-    minmax(0, 1.4fr)
-    minmax(280px, 0.6fr);
+    minmax(0, 1.4fr) minmax(280px, 0.6fr);
 
   gap: clamp(48px, 7vw, 120px);
   align-items: center;
@@ -2101,7 +1909,7 @@ h1 {
   margin-top: 18px;
 }
 
-.aura-material figcaption > span,
+.aura-material figcaption>span,
 .aura-step {
   color: var(--color-text-muted);
 
@@ -2313,7 +2121,7 @@ h1 {
   transition: color var(--transition-fast);
 }
 
-.back-title > span {
+.back-title>span {
   flex-shrink: 0;
 
   color: var(--color-text-muted);
@@ -2325,7 +2133,7 @@ h1 {
     transform var(--transition-fast);
 }
 
-.back-to-work:hover .back-title > span {
+.back-to-work:hover .back-title>span {
   color: var(--color-text);
   transform: translate(6px, -6px);
 }
@@ -2350,11 +2158,11 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .back-title > span {
+  .back-title>span {
     transition: none;
   }
 
-  .back-to-work:hover .back-title > span {
+  .back-to-work:hover .back-title>span {
     transform: none;
   }
 }

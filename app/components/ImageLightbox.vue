@@ -65,35 +65,16 @@ onBeforeUnmount(() => {
 <template>
   <Teleport to="body">
     <Transition name="lightbox">
-      <div
-        ref="dialog"
-        v-if="open"
-        class="lightbox"
-        role="dialog"
-        aria-modal="true"
-        :aria-label="caption || alt"
-        @click.self="close"
-      >
-        <button
-          ref="closeButton"
-          class="lightbox-close"
-          type="button"
-          aria-label="Close image"
-          @click="close"
-        >
+      <div ref="dialog" v-if="open" class="lightbox" role="dialog" aria-modal="true" :aria-label="caption || alt"
+        @click.self="close">
+        <button ref="closeButton" class="lightbox-close" type="button" aria-label="Close image" @click="close">
           Close ×
         </button>
 
         <div class="lightbox-content">
-          <img
-            :src="src"
-            :alt="alt"
-          >
+          <img :src="src" :alt="alt">
 
-          <p
-            v-if="caption"
-            class="lightbox-caption"
-          >
+          <p v-if="caption" class="lightbox-caption">
             {{ caption }}
           </p>
         </div>
@@ -188,6 +169,7 @@ onBeforeUnmount(() => {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .lightbox-enter-active,
   .lightbox-leave-active {
     transition: none;

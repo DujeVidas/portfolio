@@ -30,33 +30,16 @@ function handleMouseMove(event: MouseEvent) {
 </script>
 
 <template>
-  <button
-    ref="button"
-    class="enlargeable"
-    :class="imageClass"
-    type="button"
-    :aria-label="`Enlarge ${alt}`"
-    @click="emit('enlarge', src, alt, caption, button)"
-    @mouseenter="hovering = true"
-    @mouseleave="hovering = false"
-    @mousemove="handleMouseMove"
-  >
-    <img
-      :src="src"
-      :alt="alt"
-      :style="{ objectFit }"
-    >
+  <button ref="button" class="enlargeable" :class="imageClass" type="button" :aria-label="`Enlarge ${alt}`"
+    @click="emit('enlarge', src, alt, caption, button)" @mouseenter="hovering = true" @mouseleave="hovering = false"
+    @mousemove="handleMouseMove">
+    <img :src="src" :alt="alt" :style="{ objectFit }">
 
     <Teleport to="body">
-      <div
-        v-if="hovering"
-        class="enlarge-cursor"
-        :style="{
-          left: `${cursorX}px`,
-          top: `${cursorY}px`
-        }"
-        aria-hidden="true"
-      >
+      <div v-if="hovering" class="enlarge-cursor" :style="{
+        left: `${cursorX}px`,
+        top: `${cursorY}px`
+      }" aria-hidden="true">
         Enlarge ↗
       </div>
     </Teleport>
@@ -116,7 +99,8 @@ function handleMouseMove(event: MouseEvent) {
   transform: translate(16px, 16px);
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
   .enlarge-cursor {
     display: none;
   }

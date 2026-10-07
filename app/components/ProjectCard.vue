@@ -20,19 +20,10 @@ function handleMouseMove(event: MouseEvent) {
 </script>
 
 <template>
-  <NuxtLink
-    :to="to"
-    class="project-card"
-    @mouseenter="isHovering = true"
-    @mouseleave="isHovering = false"
-    @mousemove="handleMouseMove"
-  >
+  <NuxtLink :to="to" class="project-card" @mouseenter="isHovering = true" @mouseleave="isHovering = false"
+    @mousemove="handleMouseMove">
     <div class="project-image-wrapper">
-      <img
-        :src="image"
-        :alt="title"
-        class="project-image"
-      >
+      <img :src="image" :alt="title" class="project-image">
 
       <div class="project-overlay">
         <div class="project-info">
@@ -54,16 +45,12 @@ function handleMouseMove(event: MouseEvent) {
       </div>
     </div>
     <Teleport to="body">
-        <div
-            v-if="isHovering"
-            class="cursor-label"
-            :style="{
-            left: `${cursorX}px`,
-            top: `${cursorY}px`
-            }"
-        >
-            View Project ↗
-        </div>
+      <div v-if="isHovering" class="cursor-label" :style="{
+        left: `${cursorX}px`,
+        top: `${cursorY}px`
+      }">
+        View Project ↗
+      </div>
     </Teleport>
   </NuxtLink>
 </template>
@@ -197,6 +184,7 @@ function handleMouseMove(event: MouseEvent) {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .project-image,
   .project-info,
   .project-overlay {
@@ -227,7 +215,8 @@ function handleMouseMove(event: MouseEvent) {
   transform: translate(16px, 16px);
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none),
+(pointer: coarse) {
   .cursor-label {
     display: none;
   }

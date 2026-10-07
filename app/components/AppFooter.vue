@@ -11,19 +11,11 @@
             Email
           </a>
 
-          <a
-            href="https://www.linkedin.com/in/duje-vidas"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://www.linkedin.com/in/duje-vidas" target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>
 
-          <a
-            href="https://github.com/dujevidas"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://github.com/dujevidas" target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
         </div>

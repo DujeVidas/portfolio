@@ -61,10 +61,8 @@ img {
 }
 
 .container {
-  width: min(
-    calc(100% - (var(--page-padding) * 2)),
-    var(--page-width)
-  );
+  width: min(calc(100% - (var(--page-padding) * 2)),
+      var(--page-width));
 
   margin-inline: auto;
 }

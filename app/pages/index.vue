@@ -17,10 +17,7 @@
             functional digital experiences.
           </p>
 
-          <a
-            href="#work"
-            class="intro-scroll"
-          >
+          <a href="#work" class="intro-scroll">
             Selected Work
             <span aria-hidden="true">↓</span>
           </a>
@@ -35,9 +32,12 @@
             <h2>Development</h2>
           </div>
 
-          <p class="empty-message">
-            More projects coming soon.
-          </p>
+          <div class="project-list">
+            <ProjectCard title="PostgreSQL vs Redis" category="University Project · Database Benchmarking"
+              description="An automated performance benchmark comparing PostgreSQL and Redis across different database workloads."
+              tools="Python · PostgreSQL · Redis · Docker" image="/images/database-benchmark/cover.jpg"
+              to="/projects/database-benchmark" />
+          </div>
         </div>
 
         <div class="work-section">
@@ -47,23 +47,13 @@
           </div>
 
           <div class="project-list">
-            <ProjectCard
-              title="Time Leper"
-              category="Personal Project · 3D / Real-Time"
+            <ProjectCard title="Time Leper" category="Personal Project · 3D / Real-Time"
               description="A D&D creature brought from a rough phone sketch through the complete 3D pipeline and into Unreal Engine 5."
-              tools="Blender · Unreal Engine 5"
-              image="/images/time-leper/cover.png"
-              to="/projects/time-leper"
-            />
+              tools="Blender · Unreal Engine 5" image="/images/time-leper/cover.png" to="/projects/time-leper" />
 
-            <ProjectCard
-              title="Blender Studies"
-              category="Early Work · 3D"
+            <ProjectCard title="Blender Studies" category="Early Work · 3D"
               description="A small archive of early renders created while learning modeling, materials, lighting, and rendering in Blender."
-              tools="Blender"
-              image="/images/blender-studies/donut.png"
-              to="/projects/blender-studies"
-            />
+              tools="Blender" image="/images/blender-studies/donut.png" to="/projects/blender-studies" />
           </div>
         </div>
       </div>
@@ -200,7 +190,7 @@
   padding-block: 64px 160px;
 }
 
-.work-section + .work-section {
+.work-section+.work-section {
   margin-top: 140px;
 }
 
@@ -248,7 +238,7 @@
     padding-block: 32px 96px;
   }
 
-  .work-section + .work-section {
+  .work-section+.work-section {
     margin-top: 96px;
   }
 

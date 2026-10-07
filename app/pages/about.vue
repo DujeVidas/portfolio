@@ -1,16 +1,16 @@
 <template>
   <main>
     <section class="about-hero">
-        <div class="container">
-            <p class="about-label">
-            About
-            </p>
+      <div class="container">
+        <p class="about-label">
+          About
+        </p>
 
-            <h1>
-            Software developer interested in backend systems,
-            automation, and the space between code and graphics.
-            </h1>
-        </div>
+        <h1>
+          Software developer interested in backend systems,
+          automation, and the space between code and graphics.
+        </h1>
+      </div>
     </section>
 
     <section class="about-intro">
@@ -20,33 +20,33 @@
         </p>
 
         <div class="about-copy">
-            <p class="about-lead">
-                I'm a University Master of Informatics focused on software development,
-                with a particular interest in backend technologies.
-            </p>
+          <p class="about-lead">
+            I'm a University Master of Informatics focused on software development,
+            with a particular interest in backend technologies.
+          </p>
 
-            <p>
-                My experience spans backend and web development, databases,
-                containerization, computer vision, and automation. During my software
-                development internship, I worked on a full-stack VR Tour Management
-                Platform involving REST APIs, PostgreSQL, Prisma ORM, authentication,
-                Docker, and application deployment.
-            </p>
+          <p>
+            My experience spans backend and web development, databases,
+            containerization, computer vision, and automation. During my software
+            development internship, I worked on a full-stack VR Tour Management
+            Platform involving REST APIs, PostgreSQL, Prisma ORM, authentication,
+            Docker, and application deployment.
+          </p>
 
-            <p>
-                My Master's thesis brought software development and 3D together. I built
-                an automated synthetic dataset generation system using Blender and Python,
-                with procedural scene generation, domain randomization, automatic data
-                annotation, and the training and evaluation of YOLO computer vision models.
-            </p>
+          <p>
+            My Master's thesis brought software development and 3D together. I built
+            an automated synthetic dataset generation system using Blender and Python,
+            with procedural scene generation, domain randomization, automatic data
+            annotation, and the training and evaluation of YOLO computer vision models.
+          </p>
 
-            <p>
-                Outside of purely software-focused work, I enjoy experimenting with 3D
-                and real-time graphics. Whether I'm building a backend system, automating
-                a workflow, or creating something in Blender, I'm most interested in
-                understanding the technical problem and turning it into a practical,
-                finished solution.
-            </p>
+          <p>
+            Outside of purely software-focused work, I enjoy experimenting with 3D
+            and real-time graphics. Whether I'm building a backend system, automating
+            a workflow, or creating something in Blender, I'm most interested in
+            understanding the technical problem and turning it into a practical,
+            finished solution.
+          </p>
         </div>
       </div>
     </section>
@@ -54,47 +54,47 @@
     <section class="about-details">
       <div class="container">
         <div class="details-grid">
-            <div class="detail-column">
-                <p class="detail-label">
-                Development
-                </p>
+          <div class="detail-column">
+            <p class="detail-label">
+              Development
+            </p>
 
-                <ul>
-                <li>Python</li>
-                <li>TypeScript / JavaScript</li>
-                <li>Node.js / Express.js</li>
-                <li>REST APIs</li>
-                <li>Git / Linux</li>
-                </ul>
-            </div>
+            <ul>
+              <li>Python</li>
+              <li>TypeScript / JavaScript</li>
+              <li>Node.js / Express.js</li>
+              <li>REST APIs</li>
+              <li>Git / Linux</li>
+            </ul>
+          </div>
 
-            <div class="detail-column">
-                <p class="detail-label">
-                Data / Infrastructure
-                </p>
+          <div class="detail-column">
+            <p class="detail-label">
+              Data / Infrastructure
+            </p>
 
-                <ul>
-                <li>PostgreSQL / MySQL</li>
-                <li>Redis</li>
-                <li>Prisma ORM</li>
-                <li>Docker</li>
-                <li>Computer Vision / YOLO</li>
-                </ul>
-            </div>
+            <ul>
+              <li>PostgreSQL / MySQL</li>
+              <li>Redis</li>
+              <li>Prisma ORM</li>
+              <li>Docker</li>
+              <li>Computer Vision / YOLO</li>
+            </ul>
+          </div>
 
-            <div class="detail-column">
-                <p class="detail-label">
-                Graphics / Automation
-                </p>
+          <div class="detail-column">
+            <p class="detail-label">
+              Graphics / Automation
+            </p>
 
-                <ul>
-                <li>Blender</li>
-                <li>Unreal Engine 5</li>
-                <li>Procedural Generation</li>
-                <li>Synthetic Data</li>
-                <li>Python Automation</li>
-                </ul>
-            </div>
+            <ul>
+              <li>Blender</li>
+              <li>Unreal Engine 5</li>
+              <li>Procedural Generation</li>
+              <li>Synthetic Data</li>
+              <li>Python Automation</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -121,20 +121,12 @@
             <span aria-hidden="true">↗</span>
           </a>
 
-          <a
-            href="https://github.com/dujevidas"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://github.com/dujevidas" target="_blank" rel="noopener noreferrer">
             <span>GitHub</span>
             <span aria-hidden="true">↗</span>
           </a>
 
-          <a
-            href="https://www.linkedin.com/in/duje-vidas/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://www.linkedin.com/in/duje-vidas/" target="_blank" rel="noopener noreferrer">
             <span>LinkedIn</span>
             <span aria-hidden="true">↗</span>
           </a>
@@ -210,7 +202,7 @@
   line-height: 1.8;
 }
 
-.about-copy p + p {
+.about-copy p+p {
   margin-top: 32px;
 }
 

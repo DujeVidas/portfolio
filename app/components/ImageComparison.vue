@@ -22,26 +22,13 @@ function updatePosition(event: Event) {
 <template>
   <div class="comparison">
     <div class="comparison-images">
-      <img
-        :src="props.beforeImage"
-        :alt="props.beforeAlt"
-        class="comparison-image comparison-before"
-      >
+      <img :src="props.beforeImage" :alt="props.beforeAlt" class="comparison-image comparison-before">
 
-      <img
-        :src="props.afterImage"
-        :alt="props.afterAlt"
-        class="comparison-image comparison-after"
-        :style="{
-          clipPath: `inset(0 0 0 ${position}%)`
-        }"
-      >
+      <img :src="props.afterImage" :alt="props.afterAlt" class="comparison-image comparison-after" :style="{
+        clipPath: `inset(0 0 0 ${position}%)`
+      }">
 
-      <div
-        class="comparison-divider"
-        :style="{ left: `${position}%` }"
-        aria-hidden="true"
-      >
+      <div class="comparison-divider" :style="{ left: `${position}%` }" aria-hidden="true">
         <span class="comparison-handle">
           ↔
         </span>
@@ -55,15 +42,8 @@ function updatePosition(event: Event) {
         {{ props.afterLabel }}
       </span>
 
-      <input
-        class="comparison-range"
-        type="range"
-        min="0"
-        max="100"
-        :value="position"
-        :aria-label="`Compare ${props.beforeLabel} and ${props.afterLabel}`"
-        @input="updatePosition"
-      >
+      <input class="comparison-range" type="range" min="0" max="100" :value="position"
+        :aria-label="`Compare ${props.beforeLabel} and ${props.afterLabel}`" @input="updatePosition">
     </div>
   </div>
 </template>
@@ -103,7 +83,7 @@ function updatePosition(event: Event) {
 
 
 .comparison-after {
-    z-index: 2;
+  z-index: 2;
 }
 
 .comparison-divider {

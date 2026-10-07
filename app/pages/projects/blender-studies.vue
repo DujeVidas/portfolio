@@ -92,19 +92,9 @@ const renders = [
         </div>
 
         <div class="render-gallery">
-          <figure
-            v-for="(render, index) in renders"
-            :key="render.src"
-            class="render-item"
-          >
-            <EnlargeableImage
-              :src="render.src"
-              :alt="render.alt"
-              :caption="render.title"
-              image-class="render-image"
-              object-fit="contain"
-              @enlarge="openLightbox"
-            />
+          <figure v-for="(render, index) in renders" :key="render.src" class="render-item">
+            <EnlargeableImage :src="render.src" :alt="render.alt" :caption="render.title" image-class="render-image"
+              object-fit="contain" @enlarge="openLightbox" />
 
             <figcaption>
               <span>
@@ -120,10 +110,7 @@ const renders = [
 
     <section class="project-end">
       <div class="container">
-        <NuxtLink
-          to="/"
-          class="back-to-work"
-        >
+        <NuxtLink to="/" class="back-to-work">
           <span class="back-label">
             End of project
           </span>
@@ -136,13 +123,8 @@ const renders = [
       </div>
     </section>
 
-    <ImageLightbox
-      :open="lightbox.open"
-      :src="lightbox.src"
-      :alt="lightbox.alt"
-      :caption="lightbox.caption"
-      @close="closeLightbox"
-    />
+    <ImageLightbox :open="lightbox.open" :src="lightbox.src" :alt="lightbox.alt" :caption="lightbox.caption"
+      @close="closeLightbox" />
   </main>
 </template>
 <style scoped>
@@ -320,7 +302,7 @@ const renders = [
   letter-spacing: -0.05em;
 }
 
-.back-title > span {
+.back-title>span {
   flex-shrink: 0;
 
   color: var(--color-text-muted);
@@ -332,7 +314,7 @@ const renders = [
     transform var(--transition-fast);
 }
 
-.back-to-work:hover .back-title > span {
+.back-to-work:hover .back-title>span {
   color: var(--color-text);
   transform: translate(6px, -6px);
 }
@@ -391,11 +373,11 @@ const renders = [
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .back-title > span {
+  .back-title>span {
     transition: none;
   }
 
-  .back-to-work:hover .back-title > span {
+  .back-to-work:hover .back-title>span {
     transform: none;
   }
 }
