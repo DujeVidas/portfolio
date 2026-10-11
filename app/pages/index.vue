@@ -33,6 +33,11 @@
           </div>
 
           <div class="project-list">
+            <ProjectCard title="URL Shortener & Analytics API" category="Personal Project · Backend Development"
+              description="A FastAPI REST service for URL shortening, secure link management, and click analytics, backed by PostgreSQL and Redis."
+              tools="Python · FastAPI · PostgreSQL · Redis · Docker" image="/images/url-shortener/cover.png"
+              to="/projects/url-shortener" />
+
             <ProjectCard title="PostgreSQL vs Redis" category="University Project · Database Benchmarking"
               description="An automated performance benchmark comparing PostgreSQL and Redis across different database workloads."
               tools="Python · PostgreSQL · Redis · Docker" image="/images/database-benchmark/cover.jpg"
